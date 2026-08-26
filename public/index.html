@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Focus — Todo App</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <main class="app">
+        <header class="header">
+            <div>
+                <p class="eyebrow">MY WORKSPACE</p>
+                <h1>Things to do</h1>
+                <p class="subtitle">Keep track of your tasks and stay focused.</p>
+            </div>
+
+            <div class="task-count">
+                <span id="task-count">0</span>
+                <small>tasks</small>
+            </div>
+        </header>
+
+        <section class="card">
+            <form id="todo-form">
+                <div class="field">
+                    <label for="title">Task</label>
+                    <input
+                        id="title"
+                        name="title"
+                        type="text"
+                        placeholder="What needs to be done?"
+                        required
+                    >
+                </div>
+
+                <div class="field">
+                    <label for="description">Description</label>
+                    <textarea
+                        id="description"
+                        name="description"
+                        placeholder="Add some details (optional)"
+                        rows="3"
+                    ></textarea>
+                </div>
+
+                <button type="submit">Add task</button>
+            </form>
+        </section>
+
+        <section class="tasks-section">
+            <div class="section-heading">
+                <h2>Your tasks</h2>
+                <button id="refresh-button" class="secondary-button" type="button">
+                    Refresh
+                </button>
+            </div>
+
+            <p id="message" class="message" aria-live="polite"></p>
+
+            <div id="todo-list" class="todo-list"></div>
+
+            <div id="empty-state" class="empty-state">
+                <div class="empty-icon">✓</div>
+                <h3>No tasks yet</h3>
+                <p>Add your first task using the form above.</p>
+            </div>
+        </section>
+    </main>
+
+    <script src="/app.js"></script>
+</body>
+</html>
