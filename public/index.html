@@ -3,70 +3,88 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Focus — Todo App</title>
+    <meta name="description" content="A cheerful, focused todo board built with Rust and Axum.">
+    <title>Pinboard — Todo App</title>
     <link rel="stylesheet" href="/style.css">
 </head>
 <body>
     <main class="app">
-        <header class="header">
+        <header class="hero paper">
+            <span class="tape" aria-hidden="true"></span>
             <div>
-                <p class="eyebrow">MY WORKSPACE</p>
-                <h1>Things to do</h1>
-                <p class="subtitle">Keep track of your tasks and stay focused.</p>
+                <p class="eyebrow">TODAY'S PINBOARD</p>
+                <h1>Stick to it.</h1>
+                <p class="subtitle">Small notes. Clear mind. Good day.</p>
             </div>
-
-            <div class="task-count">
-                <span id="task-count">0</span>
-                <small>tasks</small>
+            <div class="task-count" aria-label="Active task count">
+                <strong id="task-count">0</strong>
+                <span>notes</span>
             </div>
         </header>
 
-        <section class="card">
+        <section class="composer note note-yellow" aria-labelledby="form-title">
+            <span class="pin" aria-hidden="true"></span>
+            <div class="composer-heading">
+                <div>
+                    <p class="note-kicker">QUICK NOTE</p>
+                    <h2 id="form-title">Add something</h2>
+                </div>
+                <button id="cancel-edit" class="text-button hidden" type="button">Cancel edit</button>
+            </div>
+
             <form id="todo-form">
                 <div class="field">
-                    <label for="title">Task</label>
-                    <input
-                        id="title"
-                        name="title"
-                        type="text"
-                        placeholder="What needs to be done?"
-                        required
-                    >
+                    <label for="title">What needs doing?</label>
+                    <input id="title" name="title" type="text" placeholder="Write it down..." maxlength="100" required>
                 </div>
 
                 <div class="field">
-                    <label for="description">Description</label>
-                    <textarea
-                        id="description"
-                        name="description"
-                        placeholder="Add some details (optional)"
-                        rows="3"
-                    ></textarea>
+                    <label for="description">A little context <span>(optional)</span></label>
+                    <textarea id="description" name="description" placeholder="Details, reminders, tiny thoughts..." maxlength="300" rows="3"></textarea>
                 </div>
 
-                <button type="submit">Add task</button>
+                <button id="submit-button" class="primary-button" type="submit">Pin this note</button>
             </form>
         </section>
 
-        <section class="tasks-section">
-            <div class="section-heading">
-                <h2>Your tasks</h2>
-                <button id="refresh-button" class="secondary-button" type="button">
-                    Refresh
-                </button>
+        <section class="board" aria-labelledby="tasks-heading">
+            <div class="board-heading">
+                <div>
+                    <p class="eyebrow">ON THE BOARD</p>
+                    <h2 id="tasks-heading">My notes</h2>
+                </div>
+                <button id="refresh-button" class="refresh-button" type="button">Refresh</button>
             </div>
 
             <p id="message" class="message" aria-live="polite"></p>
-
             <div id="todo-list" class="todo-list"></div>
 
-            <div id="empty-state" class="empty-state">
-                <div class="empty-icon">✓</div>
-                <h3>No tasks yet</h3>
-                <p>Add your first task using the form above.</p>
+            <div id="empty-state" class="empty-state paper">
+                <span class="tape small" aria-hidden="true"></span>
+                <div class="doodle" aria-hidden="true">↗</div>
+                <h3>Your board is clear</h3>
+                <p>Pin a note above and make a start.</p>
             </div>
         </section>
     </main>
+
+    <template id="todo-template">
+        <article class="todo-item note">
+            <span class="pin" aria-hidden="true"></span>
+            <div class="todo-topline">
+                <span class="todo-id"></span>
+                <button class="complete-button" type="button" aria-label="Mark task complete">
+                    <span aria-hidden="true">✓</span>
+                </button>
+            </div>
+            <h3 class="todo-title"></h3>
+            <p class="todo-description"></p>
+            <div class="todo-actions">
+                <button class="edit-button" type="button">Edit</button>
+                <button class="delete-button" type="button">Remove</button>
+            </div>
+        </article>
+    </template>
 
     <script src="/app.js"></script>
 </body>
