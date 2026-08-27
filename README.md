@@ -1,4 +1,4 @@
-# Rust Todo App
+# Pinboard: Rust Todo App
 
 A Todo application built with Rust, Axum, and vanilla JavaScript.
 
